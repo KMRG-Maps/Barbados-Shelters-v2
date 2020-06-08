@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+<!-- Additions -->
+        <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/L.Control.Locate.scss" />
+        
+        <style>
+ body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 800px;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+	/*HEADER STYLE*/
+        #header_wrap {
+		height: 60px;
+		background-color: #ffff33;
+		}
+	/*END OF HEADER STYLE*/ 
+            	/*HEADER STYLE*/
+        #footer_wrap {
+		height: 60px;
+		background-color: #ffff33;
+		}
+	/*END OF HEADER STYLE*/ 
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <!-- HEADER -->
+		<div id="header_wrap" class="outer">
+		    <header class="inner">
+		    	<img src="https://github.com/KMRG-Maps/Barbados-Shelters/blob/master/images/sheltericonblue.png?raw=true" style="width:40px;height:40px;border:0;padding-left: 50px;padding-top: 10px;">
+		    	<img src="https://github.com/KMRG-Maps/Barbados-Shelters/blob/master/images/shelterslogo1blue.png?raw=true" style="width:100px;height:40px;border:0;padding-left: 0px;padding-top: 10px;">
+<!--
+				<a href="http://dem.gov.bb/index.php/emergency/shelter">
+				  <img src="https://github.com/KMRG-Maps/Barbados-Shelters/blob/master/images/infoiconblue.png?raw=true" style="width:40px;height:40px;border:0;padding-right: 25px;padding-top: 10px;" align="right">
+				</a>
+-->
+		    </header>
+		</div>
+	<!-- END of HEADER -->
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#legend" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li class="disabled"><a href="#search" role="tab"><i class="fa fa-map-marker"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li class="disabled"><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    Map Brief
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p>This map illustrates the approximate location of the emergency shelters in the island of <strong>Barbados</strong>.</p>
+
+                <p>Emergency shelters can be used for several natural and man-made hazards including hurricanes, earthquakes, tsunamis, fires, oil spills and aircraft crashes to mention only a few. Shelters can be divided into two catergories:</p>
+
+             <p><strong>Category 1</strong>- Shelters which may be used during a hurricane or other hazard event.</p>
+
+            <p><strong>Category 2</strong>- Shelters which may be used if they are still in a reasonable condition after a hazard event or disaster.</p>
+
+                <p class="lorem">It should be stressed that persons who seek refuge in shelters do so at their own risk. It is therefore recommended that your home or the home of a relative or friend should always be your first option for sheltering. If you plan to remain at home, a safe room would essentially be the room with the least number of openings (windows and doors) to the outside, such as a bathroom or walk-in closet. Persons are however advised to prepare emergency kits in case they have to go to a shelter. Non-perishable food items should be included to last for at least three (3) days. It was created using  <a href="http://leafletjs.com/">Leaflet</a>.</p>
+                <p>This map is <strong>NOT FOR OFFICIAL USAGE</strong> and should not be used as your final point for selecting your nearest shelter. For more information, ensure to check with the <a href="http://gisbarbados.gov.bb/download/emergency-shelters-2017/">BGIS</a>.</p>
+            </div>
+
+            <div class="sidebar-pane" id="legend">
+                <h1 class="sidebar-header">Legend<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <table><tr><td style="text-align: center;"><img src="legend/Shelters_2020_1_10.png" /></td><td>Category 1</td></tr><tr><td style="text-align: center;"><img src="legend/Shelters_2020_1_21.png" /></td><td>Category 2</td></tr></table>
+            </div>
+
+            <div class="sidebar-pane" id="search">
+                <h1 class="sidebar-header">Search<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+        <div id="map" class="sidebar-map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/Shelters_2020_1.js"></script>
+        <script>
+<!-- Additions -->      
+        var map = L.map('map', {
+          zoomControl:false, maxZoom:17, minZoom:8
+        }).fitBounds([[13.041839838,-59.8021693432],[13.4228246173,-59.1587496765]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://github.com/Turbo87/sidebar-v2">Sidebar-v2</a>;&copy;<a href="http://gisbarbados.gov.bb/download/emergency-shelters-2017/">BGIS</a>;&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 17
+        });
+        L.control.zoom({
+        position:'topright',
+        }).addTo(map);
+  <!-- End of Additions -->          
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: 
+                        {enableHighAccuracy: true,
+                        maxZoom: 15},position:'topright',
+                        strings: {
+                        title: "Where am I?"
+                        },
+                        }).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_Shelters_2020_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Parish</th>\
+                        <td>' + (feature.properties['features__properties__Parish'] !== null ? autolinker.link(feature.properties['features__properties__Parish'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['features__properties__Name'] !== null ? autolinker.link(feature.properties['features__properties__Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Category</th>\
+                        <td>' + (feature.properties['features__properties__Cat'] !== null ? autolinker.link(feature.properties['features__properties__Cat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Public or Private Facility</th>\
+                        <td>' + (feature.properties['features__properties__PubPriv'] !== null ? autolinker.link(feature.properties['features__properties__PubPriv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wheel Chair Accessible</th>\
+                        <td>' + (feature.properties['features__properties__WCaccess'] !== null ? autolinker.link(feature.properties['features__properties__WCaccess'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Shelters_2020_1_0(feature) {
+            switch(String(feature.properties['features__properties__Cat'])) {
+                case '1':
+                    return {
+                pane: 'pane_Shelters_2020_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,62,62,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Shelters_2020_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(17,211,43,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Shelters_2020_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,32,238,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Shelters_2020_1');
+        map.getPane('pane_Shelters_2020_1').style.zIndex = 401;
+        map.getPane('pane_Shelters_2020_1').style['mix-blend-mode'] = 'normal';
+        var layer_Shelters_2020_1 = new L.geoJson(json_Shelters_2020_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Shelters_2020_1',
+            layerName: 'layer_Shelters_2020_1',
+            pane: 'pane_Shelters_2020_1',
+            onEachFeature: pop_Shelters_2020_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Shelters_2020_1_0(feature));
+            },
+        });
+        var cluster_Shelters_2020_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Shelters_2020_1.addLayer(layer_Shelters_2020_1);
+
+        bounds_group.addLayer(layer_Shelters_2020_1);
+        cluster_Shelters_2020_1.addTo(map);
+//        var baseMaps = {};
+//        L.control.layers(baseMaps,{'Shelters_2020<br /><table><tr><td style="text-align: center;"><img src="legend/Shelters_2020_1_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Shelters_2020_1_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Shelters_2020_1_2.png" /></td><td></td></tr></table>': cluster_Shelters_2020_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        setBounds();
+        </script>
+        <script src="js/leaflet-sidebar.js"></script>
+
+        <script>
+            var sidebar = L.control.sidebar('sidebar').addTo(map);
+        </script>
+    </body>
+            	 <!-- FOOTER -->
+		<div id="footer_wrap" class="outer">
+		    <header class="inner">
+		    </header>
+		</div>
+	<!-- END of FOOTER -->
+</html>
