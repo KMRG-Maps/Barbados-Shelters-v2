@@ -166,10 +166,10 @@
         map.addLayer(layer_OSMStandard_0);
         function pop_Shelters_2020_1(feature, layer) {
             var popupContent = '<table>\
-                    <!--<tr>\
+                    <tr>\
                         <th scope="row">Parish</th>\
                         <td>' + (feature.properties['features__properties__Parish'] !== null ? autolinker.link(feature.properties['features__properties__Parish'].toLocaleString()) : '') + '</td>\
-                    </tr>\-->
+                    </tr>\
                     <tr>\
                         <th scope="row">Name</th>\
                         <td>' + (feature.properties['features__properties__Name'] !== null ? autolinker.link(feature.properties['features__properties__Name'].toLocaleString()) : '') + '</td>\
@@ -178,10 +178,10 @@
                         <th scope="row">Category</th>\
                         <td>' + (feature.properties['features__properties__Cat'] !== null ? autolinker.link(feature.properties['features__properties__Cat'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <!--<tr>\
+                   <tr>\
                         <th scope="row">Public or Private Facility</th>\
                         <td>' + (feature.properties['features__properties__PubPriv'] !== null ? autolinker.link(feature.properties['features__properties__PubPriv'].toLocaleString()) : '') + '</td>\
-                    </tr>\-->
+                    </tr>\
                     <tr>\
                         <th scope="row">Wheel Chair Accessible</th>\
                         <td>' + (feature.properties['features__properties__WCaccess'] !== null ? autolinker.link(feature.properties['features__properties__WCaccess'].toLocaleString()) : '') + '</td>\
