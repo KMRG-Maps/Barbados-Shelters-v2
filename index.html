@@ -101,7 +101,7 @@
             <div class="sidebar-pane" id="creator">
                 <h1 class="sidebar-header">About Creator<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 		<p> Upon the events of the 2016 and 2017 Hurricane seasons which devasted several Caribbean islands, the <a href="https://kmrgenterprises.weebly.com/">creator</a> realised that maps where essential in times of crisis. This lead to the creation of this map you see in 2017 after the advise of a colleauge who aided in the relief efforts in the Virgin Islands.</p>
-		<a href="https://weather.com/storms/hurricane/news/2017-10-09-atlantic-hurricane-season-one-of-busiest-october"><img src="images/oct15-atl-tracks.png" style="height:200px;border:0;padding-right: 25px;padding-top: 10px;" ></a>
+		<a href="https://weather.com/"><img src="images/oct15-atl-tracks.png" style="height:200px;border:0;padding-right: 25px;padding-top: 10px;" ></a>
 		<p>It was created using <a href="http://leafletjs.com/">Leaflet</a> and QGIS, particularly the <a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web plugin</a>.</p>
 
             </div>
@@ -166,10 +166,10 @@
         map.addLayer(layer_OSMStandard_0);
         function pop_Shelters_2020_1(feature, layer) {
             var popupContent = '<table>\
-                    <tr>\
+                    <!--<tr>\
                         <th scope="row">Parish</th>\
                         <td>' + (feature.properties['features__properties__Parish'] !== null ? autolinker.link(feature.properties['features__properties__Parish'].toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    </tr>\-->
                     <tr>\
                         <th scope="row">Name</th>\
                         <td>' + (feature.properties['features__properties__Name'] !== null ? autolinker.link(feature.properties['features__properties__Name'].toLocaleString()) : '') + '</td>\
@@ -178,10 +178,10 @@
                         <th scope="row">Category</th>\
                         <td>' + (feature.properties['features__properties__Cat'] !== null ? autolinker.link(feature.properties['features__properties__Cat'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <th scope="row">Public or Private Facility</th>\
                         <td>' + (feature.properties['features__properties__PubPriv'] !== null ? autolinker.link(feature.properties['features__properties__PubPriv'].toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    </tr>\-->
                     <tr>\
                         <th scope="row">Wheel Chair Accessible</th>\
                         <td>' + (feature.properties['features__properties__WCaccess'] !== null ? autolinker.link(feature.properties['features__properties__WCaccess'].toLocaleString()) : '') + '</td>\
